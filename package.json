@@ -6,7 +6,8 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint --ignore-path .gitignore --ext .js,.jsx,.ts,.tsx ."
+    "lint": "eslint --ignore-path .gitignore --ext .js,.jsx,.ts,.tsx .",
+    "test": "jest"
   },
   "dependencies": {
     "@emotion/cache": "11.0.0-next.12",
@@ -14,12 +15,14 @@
     "@emotion/react": "11.0.0-next.12",
     "@emotion/server": "11.0.0-next.12",
     "@emotion/styled": "11.0.0-next.12",
+    "axios": "^0.19.2",
     "next": "latest",
     "react": "^16.13.1",
     "react-dom": "^16.7.0"
   },
   "devDependencies": {
     "@samtgarson/eslint-config": "^2.2.0",
+    "@types/jest": "^26.0.7",
     "@types/node": "^13.13.4",
     "@types/react": "^16.9.34",
     "@typescript-eslint/eslint-plugin": "^2.30.0",
@@ -29,6 +32,9 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^4.0.0",
+    "jest": "^26.1.0",
+    "node-mocks-http": "^1.8.1",
+    "ts-jest": "^26.1.3",
     "typescript": "^3.8.3"
   },
   "eslintConfig": {
@@ -58,5 +64,9 @@
         }
       ]
     }
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testRegex": ".*/.*\\.spec\\.ts"
   }
 }
