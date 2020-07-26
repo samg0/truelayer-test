@@ -1,6 +1,5 @@
-import { createMocks, MockResponse } from 'node-mocks-http'
+import { createMocks } from 'node-mocks-http'
 import handler from '~/pages/api/pokemon/[name]'
-import { NextApiResponse } from 'next'
 
 jest.unmock('axios')
 

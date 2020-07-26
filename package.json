@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint --ignore-path .gitignore --ext .js,.jsx,.ts,.tsx .",
-    "test": "jest"
+    "test:unit": "jest",
+    "test:e2e": "cypress"
   },
   "dependencies": {
     "@emotion/cache": "11.0.0-next.12",
@@ -22,12 +23,17 @@
   },
   "devDependencies": {
     "@samtgarson/eslint-config": "^2.2.0",
+    "@testing-library/jest-dom": "^5.11.1",
+    "@testing-library/react": "^10.4.7",
     "@types/jest": "^26.0.7",
     "@types/node": "^13.13.4",
     "@types/react": "^16.9.34",
     "@typescript-eslint/eslint-plugin": "^2.30.0",
     "@typescript-eslint/parser": "^2.30.0",
+    "babel-jest": "^26.1.0",
+    "cypress": "^4.11.0",
     "eslint": "^6.8.0",
+    "eslint-plugin-cypress": "^2.11.1",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react": "^7.19.0",
@@ -47,30 +53,29 @@
     "extends": [
       "plugin:react/recommended",
       "@samtgarson/eslint-config",
-      "@samtgarson/eslint-config/typescript"
+      "@samtgarson/eslint-config/typescript",
+      "plugin:cypress/recommended"
     ],
     "rules": {
       "@typescript-eslint/no-non-null-assertion": 0,
-      "react/prop-types": 0,
-      "react/jsx-wrap-multilines": [
-        "error",
-        {
-          "declaration": "parens-new-line",
-          "assignment": "parens-new-line",
-          "return": "parens-new-line",
-          "arrow": "parens-new-line",
-          "condition": "ignore",
-          "logical": "ignore",
-          "prop": "ignore"
-        }
-      ]
+      "react/prop-types": 0
     }
   },
   "jest": {
     "preset": "ts-jest",
-    "testRegex": ".*/.*\\.spec\\.ts",
+    "testRegex": ".*/.*\\.spec\\.tsx?",
     "moduleNameMapper": {
       "~(.*)$": "<rootDir>/$1"
+    },
+    "setupFilesAfterEnv": [
+      "<rootDir>/test/setup.ts"
+    ],
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/.next/"
+    ],
+    "transform": {
+      "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest"
     }
   }
 }
