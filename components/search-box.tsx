@@ -6,8 +6,7 @@ export const SearchBox = ({ initialQuery = '' }) => {
   const [query, setQuery] = useState(initialQuery)
 
   const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.value) return
-    setQuery(e.target.value)
+    setQuery(e.target.value || '')
   }, [query])
 
   const submit = useCallback((e: FormEvent) => {

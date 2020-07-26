@@ -28,9 +28,9 @@ export class PokeApiClient {
       const res = await this.instance.get<PokemonSpeciesResponse>(`/pokemon-species/${name}`)
       const description = res.data.flavor_text_entries.find(e => e.language.name === this.lang)
 
-      if (description) return new PokeApiResult(null, description.flavor_text)
+      if (!description) return new PokeApiResult(PokeApiError.LanguageNotFound)
 
-      return new PokeApiResult(PokeApiError.LanguageNotFound)
+      return new PokeApiResult(null, description.flavor_text)
     } catch (e) {
       if (isAxiosError(e) && e.response?.status === 404) {
         return new PokeApiResult(PokeApiError.NotFound)

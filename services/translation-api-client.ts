@@ -21,6 +21,10 @@ export class TranslationApiClient {
   private instance = Axios.create({ baseURL: TRANSLATION_API_URL })
 
   async translate (text: string): Promise<TranslationApiResult> {
+    // the API is rated limited, allow skipping
+    // translation during testing
+    if (process.env.SKIP_TRANSLATION) return new TranslationApiResult(null, text)
+
     try {
       const res = await this.instance.post<TranslationResponse>('/', { text })
       const { translated } = res.data.contents
