@@ -1,5 +1,36 @@
 import React, { useState, useCallback, ChangeEvent, FormEvent } from "react"
 import { useRouter } from 'next/router'
+import { PokeButton } from "./button"
+import styled from "@emotion/styled"
+
+const StyledForm = styled.form({
+  display: 'flex',
+  alignItems: 'flex-end',
+  backgroundColor: '#eee',
+  padding: 10,
+  borderRadius: 3
+})
+
+const SearchBarWrapper = styled.fieldset({
+  border: 0,
+  padding: 0,
+  flexGrow: 1,
+  position: 'relative',
+  display: 'flex',
+  flexFlow: 'column nowrap',
+  justifyContent: 'stretch',
+  label: {
+    fontSize: '0.7rem',
+    textTransform: 'uppercase',
+    letterSpacing: 0.2
+  },
+  input: {
+    border: 0,
+    borderRadius: 3,
+    padding: 5,
+    marginLeft: 0
+  }
+})
 
 export const SearchBox = ({ initialQuery = '' }) => {
   const router = useRouter()
@@ -15,9 +46,11 @@ export const SearchBox = ({ initialQuery = '' }) => {
     router.push('/pokemon/[name]', `/pokemon/${query.toLowerCase()}`)
   }, [query])
 
-  return <form onSubmit={submit}>
-    <label htmlFor="search-box">Pokemon Name</label>
-    <input id="search-box" value={query} onChange={handleChange} />
-    <button type="submit">Search</button>
-  </form>
+  return <StyledForm onSubmit={submit}>
+    <SearchBarWrapper>
+      <label htmlFor="search-box">Pokemon Name</label>
+      <input id="search-box" value={query} onChange={handleChange} placeholder="Search..." />
+    </SearchBarWrapper>
+    <PokeButton primary type="submit">Search</PokeButton>
+  </StyledForm>
 }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import Link from 'next/link'
 import { FavouriteStorageService } from "~/services/favourite-storage-service"
+import Head from "next/head"
 
 const FavouriteItem = ({ name }: { name: string }) => <li>
   <Link href="/pokemon/[name]" as={`/pokemon/${name}`}>
@@ -17,6 +18,7 @@ const FavouritesPage = () => {
   }, [])
 
   return <section>
+    <Head><title>Favourites</title></Head>
     <h1>Favourites</h1>
     <ul>
       { items.map(item => <FavouriteItem key={item} name={item} />) }

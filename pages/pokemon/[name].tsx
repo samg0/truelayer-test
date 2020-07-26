@@ -1,9 +1,12 @@
-import React, { FC, useRef, useEffect, useCallback, useState } from 'react'
+import React, { FC, useEffect, useCallback, useState } from 'react'
+import Head from 'next/head'
 import { SearchBox } from '~/components/search-box'
 import { GetServerSidePropsContext } from 'next'
 import Axios from 'axios'
 import { FavouriteStorageService } from '~/services/favourite-storage-service'
 import { ErrorPage } from '~/components/error-page'
+import { PokeButton } from '~/components/button'
+import { isAxiosError } from '~/util/error-guard'
 
 type PokemonPageParams = { name: string }
 type PokemonPageProps = { name: string, description: string, error?: undefined } | { name?: undefined, description?: undefined, error: string }
@@ -21,11 +24,11 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext<PokemonP
 
   try {
     const { data: { description } } = await Axios.get(`${apiUrl}/api/pokemon/${name}`)
-    if (!description) return showError(404, 'Not Found')
 
     return { props: { name, description } }
   } catch (e) {
-    console.error(e.message)
+    console.error('Client: ', e.message)
+    if (isAxiosError(e) && e.response?.status === 404) return showError(404, `Pokemon ${name} Not Found`)
     return showError()
   }
 }
@@ -47,13 +50,16 @@ const ValidPokemonPage: FC<{ name: string, description: string }> = ({ name, des
   }, [name, isSaved])
 
   return <>
+    <Head><title>{ name }</title></Head>
     <header>
       <SearchBox initialQuery={name} />
     </header>
     <section>
       <h1>{ name }</h1>
       <p>{ description }</p>
-      <button onClick={ toggleSaved }>{ isSaved ? 'Remove from favourites' : 'Add to favourites' }</button>
+      <PokeButton onClick={ toggleSaved }>
+        { isSaved ? 'Remove from favourites' : 'Add to favourites' }
+      </PokeButton>
     </section>
   </>
 }

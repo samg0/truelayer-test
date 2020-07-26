@@ -29,7 +29,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     res.status(200).json({ name, description: translationResult.text })
   } catch (e) {
-    console.error(e.message)
+    console.error('Server: ', e.message)
     res.status(500).json({ error: 'Server error' })
   }
 }
