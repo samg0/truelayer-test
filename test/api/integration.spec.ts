@@ -17,21 +17,21 @@ describe('/api/pokemon/[name]', () => {
 
   describe('for a valid name', () => {
     const name = 'charizard'
-    const description = 'Spits fire that\nis hot enough to\nmelt boulders.\fKnown to cause\nforest fires\nunintentionally.'
+    const description = 'Spits fire yond is hot enow to melt boulders. Known to cause forest fires unintentionally.'
 
     it('successfully returns name and description', async () => {
       const response = await makeRequest(name)
       expect(response._getStatusCode()).toBe(200)
       expect(response._getJSONData()).toHaveProperty('name', name)
-      expect(response._getJSONData()).toHaveProperty('rawDescription', description)
+      expect(response._getJSONData()).toHaveProperty('description', description)
     })
 
     describe('with a different language', () => {
-      const germanDescription = 'Wenn dieses Pokémon einen Strahl glühenden\nFeuers speit, leuchtet seine Schwanzspitze auf.'
+      const germanDescription = 'Wenn dieses pokémon einen strahl glühenden feuers speit,  leuchtet seine schwanzspitze auf.'
 
       it('has the correct description', async () => {
         const response = await makeRequest(name, { 'accept-language': 'de' })
-        expect(response._getJSONData()).toHaveProperty('rawDescription', germanDescription)
+        expect(response._getJSONData()).toHaveProperty('description', germanDescription)
       })
 
       describe('but the lang is not found', () => {

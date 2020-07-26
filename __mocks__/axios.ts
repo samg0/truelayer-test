@@ -1,5 +1,6 @@
 export const mockInstance = {
-  get: jest.fn()
+  get: jest.fn(),
+  post: jest.fn()
 }
 
 export default {
