@@ -6,6 +6,8 @@ import Axios from 'axios'
 type PokemonPageParams = { name: string }
 type PokemonPageProps = { name: string, description: string }
 
+const apiUrl = process.env.API_URL || 'http://localhost:3000'
+
 export const getServerSideProps = async (ctx: GetServerSidePropsContext<PokemonPageParams>): Promise<{ props: PokemonPageProps } | undefined> => {
   const { params: { name } = {} } = ctx
   const showError = (code = 500, message = 'Server Error') => {
@@ -20,7 +22,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext<PokemonP
   }
 
   try {
-    const { data: { description } } = await Axios.get(`${process.env.API_URL}/api/pokemon/${name}`)
+    const { data: { description } } = await Axios.get(`${apiUrl}/api/pokemon/${name}`)
     if (!description) {
       showError(404, 'Not Found')
       return

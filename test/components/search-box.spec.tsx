@@ -2,6 +2,7 @@ import React from 'react'
 import { render, fireEvent } from '@testing-library/react'
 import { SearchBox } from '~/components/search-box'
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const useRouter = jest.spyOn(require('next/router'), 'useRouter')
 const push = jest.fn()
 useRouter.mockImplementation(() => ({ push }))

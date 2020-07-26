@@ -7,8 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint --ignore-path .gitignore --ext .js,.jsx,.ts,.tsx .",
-    "test:unit": "jest",
-    "test:e2e": "cypress"
+    "test": "jest",
+    "cypress": "cypress"
   },
   "dependencies": {
     "@emotion/cache": "11.0.0-next.12",

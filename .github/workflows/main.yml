@@ -1,0 +1,24 @@
+name: Run tests
+on: [push]
+
+jobs:
+  tests:
+    runs-on: ubuntu-16.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Install deps
+        uses: cypress-io/github-action@v2
+        with:
+          runTests: false
+      - name: Lint
+        run: npm run lint
+      - name: Unit tests
+        run: npm run test
+      - name: Cypress tests
+        uses: cypress-io/github-action@v2
+        with:
+          install: false
+          build: npm run build
+          start: "npm run start"
+          wait-on: "http://localhost:3000"
