@@ -4,7 +4,7 @@ import { FavouriteStorageService } from "~/services/favourite-storage-service"
 import Head from "next/head"
 
 const FavouriteItem = ({ name }: { name: string }) => <li>
-  <Link href="/pokemon/[name]" as={`/pokemon/${name}`}>
+  <Link href="/pokemon/[name]" as={`/pokemon/${name}`} prefetch>
     <a>{ name }</a>
   </Link>
 </li>
@@ -23,6 +23,7 @@ const FavouritesPage = () => {
     <ul>
       { items.map(item => <FavouriteItem key={item} name={item} />) }
     </ul>
+    { items.length === 0 && <p>No favourites yet!</p> }
   </section>
 }
 

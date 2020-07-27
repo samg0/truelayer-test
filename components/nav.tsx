@@ -20,7 +20,7 @@ const NavLink = ({ href, label }: { href: string, label: string }) => {
   const router = useRouter()
   const active = useMemo(() => router.pathname === href, [router])
 
-  return <Link href={href}>
+  return <Link href={href} passHref prefetch>
     <StyledLink style={{ fontWeight: active ? 'bold' : 'normal' }}>
       { label }
     </StyledLink>

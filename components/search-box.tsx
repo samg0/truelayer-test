@@ -1,4 +1,4 @@
-import React, { useState, useCallback, ChangeEvent, FormEvent } from "react"
+import React, { useState, useCallback, ChangeEvent, FormEvent, useEffect } from "react"
 import { useRouter } from 'next/router'
 import { PokeButton } from "./button"
 import styled from "@emotion/styled"
@@ -35,6 +35,9 @@ const SearchBarWrapper = styled.fieldset({
 export const SearchBox = ({ initialQuery = '' }) => {
   const router = useRouter()
   const [query, setQuery] = useState(initialQuery)
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => setLoading(false), [initialQuery])
 
   const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value || '')
@@ -43,6 +46,7 @@ export const SearchBox = ({ initialQuery = '' }) => {
   const submit = useCallback((e: FormEvent) => {
     e.preventDefault()
 
+    setLoading(true)
     router.push('/pokemon/[name]', `/pokemon/${query.toLowerCase()}`)
   }, [query])
 
@@ -51,6 +55,6 @@ export const SearchBox = ({ initialQuery = '' }) => {
       <label htmlFor="search-box">Pokemon Name</label>
       <input id="search-box" value={query} onChange={handleChange} placeholder="Search..." />
     </SearchBarWrapper>
-    <PokeButton primary type="submit">Search</PokeButton>
+    <PokeButton disabled={loading} primary type="submit">{ loading ? 'Loading...' : 'Search' }</PokeButton>
   </StyledForm>
 }

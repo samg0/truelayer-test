@@ -8,5 +8,6 @@ export const PokeButton = styled.button<{ primary?: boolean }>(({ primary = fals
   border: 0,
   borderRadius: 3,
   color: primary ? 'white' : 'black',
-  backgroundColor: primary ? '#1502ff' : '#eee'
+  backgroundColor: primary ? '#1502ff' : '#eee',
+  cursor: 'pointer'
 }))

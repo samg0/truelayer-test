@@ -7,6 +7,9 @@ export const GlobalStyles = () => (
       'html, body': {
         fontFamily: `'Open Sans', sans-serif`,
         background: '#eee'
+      },
+      a: {
+        color: 'black'
       }
     }}
   />
