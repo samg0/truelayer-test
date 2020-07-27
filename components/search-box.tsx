@@ -46,6 +46,8 @@ export const SearchBox = ({ initialQuery = '' }) => {
   const submit = useCallback((e: FormEvent) => {
     e.preventDefault()
 
+    if (query === '') return
+
     setLoading(true)
     router.push('/pokemon/[name]', `/pokemon/${query.toLowerCase()}`)
   }, [query])
