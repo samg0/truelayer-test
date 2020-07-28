@@ -1,8 +1,8 @@
-**true-layer-test**
+**truelayer-test**
 
 🚀 Deployed to [http://truelayer-test.samgarson.com/](http://truelayer-test.samgarson.com/)
 
-🛠 CI running on [Github Actions](https://github.com/samtgarson/true-layer-test/actions)
+🛠CI running on [Github Actions](https://github.com/samg0/truelayer-test/actions)
 
 ## Intro
 
